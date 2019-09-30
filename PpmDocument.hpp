@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <fstream>
 #include "FileHelpers.h"
 #include "Pixel.hpp"
 using namespace std;
@@ -20,6 +21,9 @@ private:
 	string _file_name;
 	vector<int> _rgb_data;
 	vector<Pixel> _pixel_data;
+	//ifstream imgFile;
+	//string inputData;
+	//vector<string> data;
 
 public:
 
@@ -37,6 +41,32 @@ public:
 		}
 		else
 		{
+			/*
+			imgFile.open(_file_name);
+
+			imgFile >> _format;
+			imgFile >> _width;
+			imgFile >> _height;
+			imgFile >> _color_depth;
+
+			while (imgFile.good())
+			{
+				getline(imgFile, inputData);
+				data.push_back(inputData);
+			}
+
+			imgFile.close();
+
+			for (int i = 0; i < data.size(); i += 3)
+			{
+				int redTemp = stoi(data[i]);
+				int greenTemp = stoi(data[i + 1]);
+				int blueTemp = stoi(data[i + 2]);
+
+				_pixel_data.push_back(Pixel(redTemp, greenTemp, blueTemp));
+			}
+			*/
+
 			//set object properties
 			_format = raw_data[0];
 
@@ -57,24 +87,23 @@ public:
 				while (numbers_str.good() == true)
 				{
 					string temp;
+
 					getline(numbers_str, temp, ' ');
 					if (temp.length() > 0 && temp != " ")
 					{
 						_rgb_data.push_back(stoi(temp));
 					}
 				}
+			}
 
-				for (int j = 0; j < _rgb_data.size();)
-				{
-					int redTemp = _rgb_data[j];
-					j++;
-					int greenTemp = _rgb_data[j];
-					j++;
-					int blueTemp = _rgb_data[j];
-					j++;
+			//convert rgb data to Pixel class
+			for (int j = 0; j < _rgb_data.size() - 1; j += 3)
+			{
+				int redTemp = _rgb_data[j];
+				int greenTemp = _rgb_data[j + 1];
+				int blueTemp = _rgb_data[j + 2];
 
-					_pixel_data.push_back(Pixel(redTemp, greenTemp, blueTemp));
-				}
+				_pixel_data.push_back(Pixel(redTemp, greenTemp, blueTemp));
 			}
 		}
 	}
@@ -136,7 +165,7 @@ public:
 
 	int getPixelCount() const
 	{
-		return static_cast<int>(_pixel_data.size());
+		return _pixel_data.size();
 	}
 
 };

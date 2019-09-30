@@ -24,20 +24,20 @@ int main(int argc, char* argv[])
 	cout << "Enter destination file: ";
 	cin >> outputName;
 
-	cout << "*** Image Effects ***" << "/n"
-		<< "1. Remove Red" << "/n" << "2. Remove Blue" << "/n"
-		<< "3. Remove Green" << "/n" << "4. Negate Red" << "/n"
-		<< "5. Negate Blue" << "/n" << "6. Negate Green" << "/n"
-		<< "7. Grayscale" << "/n" << "/n" << "Selection: ";
+	cout << "*** Image Effects ***" << endl
+		<< "1. Remove Red" << endl << "2. Remove Blue" << endl
+		<< "3. Remove Green" << endl << "4. Negate Red" << endl
+		<< "5. Negate Blue" << endl << "6. Negate Green" << endl
+		<< "7. Grayscale" << endl << endl << "Selection (please input as # only): ";
 	cin >> effect;
 
 	//OUTPUT FILE, currently sort of broken
 
 	imgEdit.open(outputName);
-	imgEdit << sourceImage.getImageFormat() << "\n";
+	imgEdit << sourceImage.getImageFormat() << endl;
 	imgEdit << sourceImage.getWidth() << " ";
-	imgEdit << sourceImage.getHeight() << "\n";
-	imgEdit << sourceImage.getColorDepth() << "\n";
+	imgEdit << sourceImage.getHeight() << endl;
+	imgEdit << sourceImage.getColorDepth() << endl;
 
 	vector<Pixel> imagePixelData = sourceImage.getPixelData();
 
@@ -46,13 +46,13 @@ int main(int argc, char* argv[])
 		imgEdit << imagePixelData[i].getRed() << " "
 			<< imagePixelData[i].getGreen() << " "
 			<< imagePixelData[i].getBlue() << " ";
-		if (i > 0 && i % sourceImage.getWidth() == 0)
+		if ((i + 1) % sourceImage.getWidth() == 0)
 		{
-			imgEdit << "\n";
+			imgEdit << endl;
 		}
 	}
 
-	imgEdit.close();
+	//imgEdit.close();
 
 	// !OUTPUT FILE, nothing after this point is "sort of broken"
 
