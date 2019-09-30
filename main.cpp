@@ -31,8 +31,6 @@ int main(int argc, char* argv[])
 		<< "7. Grayscale" << endl << endl << "Selection (please input as # only): ";
 	cin >> effect;
 
-	//OUTPUT FILE, currently sort of broken
-
 	imgEdit.open(outputName);
 	imgEdit << sourceImage.getImageFormat() << endl;
 	imgEdit << sourceImage.getWidth() << " ";
@@ -52,9 +50,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	//imgEdit.close();
-
-	// !OUTPUT FILE, nothing after this point is "sort of broken"
+	imgEdit.close();
 
 	cout << "Program complete";
 

@@ -12,8 +12,7 @@ using namespace std;
 class PpmDocument
 {
 private:
-	//underscore means that the variable belongs
-	//to the object
+
 	string _format;
 	int _width = 0;
 	int _height = 0;
@@ -21,69 +20,39 @@ private:
 	string _file_name;
 	vector<int> _rgb_data;
 	vector<Pixel> _pixel_data;
-	//ifstream imgFile;
-	//string inputData;
-	//vector<string> data;
 
 public:
 
-	//constructor method gets called automatically
-	//whenever we create a new PpmDocument
+	//standard constructor
 	PpmDocument(string file_name)
 	{
+		//read file
 		_file_name = file_name;
 		vector<string> raw_data = readFile(_file_name);
 
-		//make sure file was read successfully
+		//check file
 		if (raw_data.size() == 0)
 		{
 			//TODO: throw error
 		}
 		else
 		{
-			/*
-			imgFile.open(_file_name);
-
-			imgFile >> _format;
-			imgFile >> _width;
-			imgFile >> _height;
-			imgFile >> _color_depth;
-
-			while (imgFile.good())
-			{
-				getline(imgFile, inputData);
-				data.push_back(inputData);
-			}
-
-			imgFile.close();
-
-			for (int i = 0; i < data.size(); i += 3)
-			{
-				int redTemp = stoi(data[i]);
-				int greenTemp = stoi(data[i + 1]);
-				int blueTemp = stoi(data[i + 2]);
-
-				_pixel_data.push_back(Pixel(redTemp, greenTemp, blueTemp));
-			}
-			*/
-
-			//set object properties
+			//read format
 			_format = raw_data[0];
 
-			//grab width and height using istringstream
+			//read dimension data
 			istringstream line{ raw_data[1] };
 			line >> _width;
 			line >> _height;
 
-			//color depth
+			//read color depth
 			_color_depth = stoi(raw_data[2]);
 
-			//process data
+			//read rgb data
 			for (int i = 3; i < raw_data.size(); i++)
 			{
 				istringstream numbers_str{ raw_data[i] };
 
-				//grab all numbers per line
 				while (numbers_str.good() == true)
 				{
 					string temp;
@@ -108,8 +77,7 @@ public:
 		}
 	}
 
-	//do nothing constructor for when we don't
-	//have a file name
+	//empty constructor
 	PpmDocument()
 	{
 
