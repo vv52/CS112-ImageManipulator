@@ -134,6 +134,10 @@ public:
 		return _pixel_data;
 	}
 
+	int getPixelCount() const
+	{
+		return static_cast<int>(_pixel_data.size());
+	}
 
 };
 

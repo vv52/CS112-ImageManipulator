@@ -18,13 +18,17 @@ public:
 
 	Pixel(int red, int green, int blue)
 	{
-		_red = red;
-		_green = green;
-		_blue = blue;
+		_rgb.push_back(red);
+		_rgb.push_back(green);
+		_rgb.push_back(blue);
 
-		_rgb.push_back(_red);
-		_rgb.push_back(_green);
-		_rgb.push_back(_blue);
+		//_red = red;
+		//_green = green;
+		//_blue = blue;
+
+		//_rgb.push_back(_red);
+		//_rgb.push_back(_green);
+		//_rgb.push_back(_blue);
 	}
 
 	Pixel()
@@ -33,52 +37,68 @@ public:
 
 	int getRed() const
 	{
-		return _red;
+		return _rgb[0];
+
+		//return _red;
 	}
 
 	int getGreen() const
 	{
-		return _green;
+		return _rgb[1];
+
+		//return _green;
 	}
 
 	int getBlue() const
 	{
-		return _blue;
+		return _rgb[2];
+
+		//return _blue;
 	}
 
 	vector<int> getRgb()
 	{
-		_rgb.push_back(_red);
-		_rgb.push_back(_green);
-		_rgb.push_back(_blue);
+		//_rgb.push_back(_red);
+		//_rgb.push_back(_green);
+		//_rgb.push_back(_blue);
 
 		return _rgb;
 	}
 
 	void setRed(int newRed)
 	{
-		_red = newRed;
+		_rgb[0] = newRed;
+
+		//_red = newRed;
 	}
 
 	void setGreen(int newGreen)
 	{
-		_green = newGreen;
+		_rgb[1] = newGreen;
+
+		//_green = newGreen;
 	}
 
 	void setBlue(int newBlue)
 	{
-		_blue = newBlue;
+		_rgb[2] = newBlue;
+
+		//_blue = newBlue;
 	}
 
 	void setRGB(int newRed, int newGreen, int newBlue)
 	{
-		_red = newRed;
-		_green = newGreen;
-		_blue = newBlue;
+		_rgb[0] = newRed;
+		_rgb[1] = newGreen;
+		_rgb[2] = newBlue;
 
-		_rgb.push_back(_red);
-		_rgb.push_back(_green);
-		_rgb.push_back(_blue);
+		//_red = newRed;
+		//_green = newGreen;
+		//_blue = newBlue;
+
+		//_rgb.push_back(_red);
+		//_rgb.push_back(_green);
+		//_rgb.push_back(_blue);
 	}
 };
 #endif // !PIXEL_HPP
