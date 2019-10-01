@@ -7,7 +7,7 @@
 #include <sstream>
 #include <fstream>
 #include "Pixel.hpp"
-#include "FileHelpers.h"
+#include "ReadFile.h"
 using namespace std;
 
 class PpmDocument

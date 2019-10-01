@@ -124,7 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="FileHelpers.cpp" />
+    <ClCompile Include="ReadFile.cpp" />
     <ClCompile Include="WriteFile.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +137,7 @@
     <None Include="samples\tinypix.ppm" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileHelpers.h" />
+    <ClInclude Include="ReadFile.h" />
     <ClInclude Include="Pixel.hpp" />
     <ClInclude Include="PpmDocument.hpp" />
     <ClInclude Include="WriteFile.h" />
