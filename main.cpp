@@ -6,6 +6,7 @@
 #include "PpmDocument.hpp"
 #include "FileHelpers.h"
 #include "Pixel.hpp"
+#include "WriteFile.h"
 using namespace std;
 
 
@@ -13,7 +14,7 @@ int main(int argc, char* argv[])
 {
 	string fileName;
 	string outputName;
-	ofstream imgEdit;
+	//ofstream imgEdit;
 	int effect;
 
 	cout << "Enter source file: ";
@@ -31,6 +32,9 @@ int main(int argc, char* argv[])
 		<< "7. Grayscale" << endl << endl << "Selection (please input as # only): ";
 	cin >> effect;
 
+	writeFile(sourceImage, outputName);
+
+	/*
 	imgEdit.open(outputName);
 	imgEdit << sourceImage.getImageFormat() << endl;
 	imgEdit << sourceImage.getWidth() << " ";
@@ -51,6 +55,7 @@ int main(int argc, char* argv[])
 	}
 
 	imgEdit.close();
+	*/
 
 	cout << "Program complete";
 

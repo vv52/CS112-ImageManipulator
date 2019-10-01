@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="FileHelpers.cpp" />
+    <ClCompile Include="WriteFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="samples\blocks.ppm" />
@@ -139,6 +140,7 @@
     <ClInclude Include="FileHelpers.h" />
     <ClInclude Include="Pixel.hpp" />
     <ClInclude Include="PpmDocument.hpp" />
+    <ClInclude Include="WriteFile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

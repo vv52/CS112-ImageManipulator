@@ -1,12 +1,13 @@
 #pragma once
 #ifndef PPM_DOCUMENT_HPP
 #define PPM_DOCUMENT_HPP
+
 #include <string>
 #include <vector>
 #include <sstream>
 #include <fstream>
-#include "FileHelpers.h"
 #include "Pixel.hpp"
+#include "FileHelpers.h"
 using namespace std;
 
 class PpmDocument
@@ -133,7 +134,7 @@ public:
 
 	int getPixelCount() const
 	{
-		return _pixel_data.size();
+		return static_cast<int>(_pixel_data.size());
 	}
 
 };
