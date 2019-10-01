@@ -139,9 +139,15 @@ public:
 
 	void setPixelData(vector<Pixel> editedPixelData)
 	{
-		for (int j = 0; j < _pixel_data.size() - 1; j++)
+		_pixel_data.clear();
+
+		for (int k = 0; k < editedPixelData.size() - 1; k += 3)
 		{
-			_pixel_data[j] = editedPixelData[j];
+			int redTemp = editedPixelData[k].getRed();
+			int greenTemp = editedPixelData[k].getGreen();
+			int blueTemp = editedPixelData[k].getBlue();
+
+			_pixel_data.push_back(Pixel(redTemp, greenTemp, blueTemp));
 		}
 	}
 
