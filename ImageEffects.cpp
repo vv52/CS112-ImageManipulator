@@ -1,6 +1,6 @@
 #include "ImageEffects.h"
 
-void removeRed(PpmDocument project)
+PpmDocument removeRed(PpmDocument project)
 {
 	vector<Pixel> editedPixelData = project.getPixelData();
 
@@ -10,9 +10,11 @@ void removeRed(PpmDocument project)
 	}
 
 	project.setPixelData(editedPixelData);
+
+	return project;
 }
 
-void removeBlue(PpmDocument project)
+PpmDocument removeBlue(PpmDocument project)
 {
 	vector<Pixel> editedPixelData = project.getPixelData();
 
@@ -24,7 +26,7 @@ void removeBlue(PpmDocument project)
 	project.setPixelData(editedPixelData);
 }
 
-void removeGreen(PpmDocument project)
+PpmDocument removeGreen(PpmDocument project)
 {
 	vector<Pixel> editedPixelData = project.getPixelData();
 
@@ -36,7 +38,7 @@ void removeGreen(PpmDocument project)
 	project.setPixelData(editedPixelData);
 }
 
-void negateRed(PpmDocument project)
+PpmDocument negateRed(PpmDocument project)
 {
 	vector<Pixel> editedPixelData = project.getPixelData();
 
@@ -49,7 +51,7 @@ void negateRed(PpmDocument project)
 	project.setPixelData(editedPixelData);
 }
 
-void negateBlue(PpmDocument project)
+PpmDocument negateBlue(PpmDocument project)
 {
 	vector<Pixel> editedPixelData = project.getPixelData();
 
@@ -62,7 +64,7 @@ void negateBlue(PpmDocument project)
 	project.setPixelData(editedPixelData);
 }
 
-void negateGreen(PpmDocument project)
+PpmDocument negateGreen(PpmDocument project)
 {
 	vector<Pixel> editedPixelData = project.getPixelData();
 
@@ -75,7 +77,7 @@ void negateGreen(PpmDocument project)
 	project.setPixelData(editedPixelData);
 }
 
-void toGreyscale(PpmDocument project)
+PpmDocument toGreyscale(PpmDocument project)
 {
 	vector<Pixel> editedPixelData = project.getPixelData();
 

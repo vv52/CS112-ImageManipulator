@@ -141,6 +141,8 @@ public:
 	{
 		_pixel_data.clear();
 
+		_pixel_data = editedPixelData;
+		/*
 		for (int k = 0; k < editedPixelData.size() - 1; k += 3)
 		{
 			int redTemp = editedPixelData[k].getRed();
@@ -149,6 +151,7 @@ public:
 
 			_pixel_data.push_back(Pixel(redTemp, greenTemp, blueTemp));
 		}
+		*/
 	}
 
 };

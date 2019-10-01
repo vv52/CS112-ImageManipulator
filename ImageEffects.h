@@ -7,12 +7,12 @@
 #include "PpmDocument.hpp"
 using namespace std;
 
-void removeRed(PpmDocument project);
-void removeBlue(PpmDocument project);
-void removeGreen(PpmDocument project);
-void negateRed(PpmDocument project);
-void negateBlue(PpmDocument project);
-void negateGreen(PpmDocument project);
-void toGreyscale(PpmDocument project);
+PpmDocument removeRed(PpmDocument project);
+PpmDocument removeBlue(PpmDocument project);
+PpmDocument removeGreen(PpmDocument project);
+PpmDocument negateRed(PpmDocument project);
+PpmDocument negateBlue(PpmDocument project);
+PpmDocument negateGreen(PpmDocument project);
+PpmDocument toGreyscale(PpmDocument project);
 
 #endif

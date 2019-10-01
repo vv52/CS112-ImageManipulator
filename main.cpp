@@ -32,33 +32,35 @@ int main(int argc, char* argv[])
 		<< "7. Grayscale" << endl << endl << "Selection (please input as # only): ";
 	cin >> effect;
 
+	PpmDocument editedImage;
+
 	switch (effect) {
 		case 1 :
-			removeRed(sourceImage);
+			editedImage = removeRed(sourceImage);
 			break;
 		case 2 :
-			removeBlue(sourceImage);
+			editedImage = removeBlue(sourceImage);
 			break;
 		case 3 :
-			removeGreen(sourceImage);
+			editedImage = removeGreen(sourceImage);
 			break;
 		case 4 :
-			negateRed(sourceImage);
+			editedImage = negateRed(sourceImage);
 			break;
 		case 5 :
-			negateBlue(sourceImage);
+			editedImage = negateBlue(sourceImage);
 			break;
 		case 6 :
-			negateGreen(sourceImage);
+			editedImage = negateGreen(sourceImage);
 			break;
 		case 7 :
-			toGreyscale(sourceImage);
+			editedImage = toGreyscale(sourceImage);
 			break;
 		default:
 			cout << "Invalid selection!";
 	}
 
-	writeFile(sourceImage, outputName);
+	writeFile(editedImage, outputName);
 
 	cout << "Done." << endl << endl << "Program complete";
 
