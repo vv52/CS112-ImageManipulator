@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ImageEffects.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ReadFile.cpp" />
     <ClCompile Include="WriteFile.cpp" />
@@ -137,6 +138,7 @@
     <None Include="samples\tinypix.ppm" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ImageEffects.h" />
     <ClInclude Include="ReadFile.h" />
     <ClInclude Include="Pixel.hpp" />
     <ClInclude Include="PpmDocument.hpp" />

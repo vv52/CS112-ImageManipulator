@@ -7,6 +7,7 @@
 #include "Pixel.hpp"
 #include "ReadFile.h"
 #include "WriteFile.h"
+#include "ImageEffects.h"
 using namespace std;
 
 
@@ -14,7 +15,6 @@ int main(int argc, char* argv[])
 {
 	string fileName;
 	string outputName;
-	//ofstream imgEdit;
 	int effect;
 
 	cout << "Enter source file: ";
@@ -31,6 +31,32 @@ int main(int argc, char* argv[])
 		<< "5. Negate Blue" << endl << "6. Negate Green" << endl
 		<< "7. Grayscale" << endl << endl << "Selection (please input as # only): ";
 	cin >> effect;
+
+	switch (effect) {
+		case 1 :
+			removeRed(sourceImage);
+			break;
+		case 2 :
+			removeBlue(sourceImage);
+			break;
+		case 3 :
+			removeGreen(sourceImage);
+			break;
+		case 4 :
+			negateRed(sourceImage);
+			break;
+		case 5 :
+			negateBlue(sourceImage);
+			break;
+		case 6 :
+			negateGreen(sourceImage);
+			break;
+		case 7 :
+			toGreyscale(sourceImage);
+			break;
+		default:
+			cout << "Invalid selection!";
+	}
 
 	writeFile(sourceImage, outputName);
 

@@ -137,6 +137,14 @@ public:
 		return static_cast<int>(_pixel_data.size());
 	}
 
+	void setPixelData(vector<Pixel> editedPixelData)
+	{
+		for (int j = 0; j < _pixel_data.size() - 1; j++)
+		{
+			_pixel_data[j] = editedPixelData[j];
+		}
+	}
+
 };
 
 #endif // !PPM_DOCUMENT_HPP
