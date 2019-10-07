@@ -4,6 +4,7 @@
 
 #include <string>
 #include <fstream>
+#include <cstdlib>
 #include "PpmDocument.hpp"
 using namespace std;
 
@@ -14,5 +15,7 @@ PpmDocument negateRed(PpmDocument& project);
 PpmDocument negateBlue(PpmDocument& project);
 PpmDocument negateGreen(PpmDocument& project);
 PpmDocument toGreyscale(PpmDocument& project);
+PpmDocument addNoise(PpmDocument& project);
+PpmDocument highContrast(PpmDocument& project);
 
 #endif

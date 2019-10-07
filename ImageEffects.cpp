@@ -105,3 +105,82 @@ PpmDocument toGreyscale(PpmDocument& project)
 
 	return project;
 }
+
+PpmDocument addNoise(PpmDocument& project)
+{
+	vector<Pixel> editedPixelData = project.getPixelData();
+	int noiseValue = 0;
+
+	for (int i = 0; i < project.getPixelCount(); i++)
+	{
+		noiseValue = ((rand() % 21) - 10);
+
+		int currentRed = editedPixelData[i].getRed();
+		currentRed += noiseValue;
+		if (currentRed < 0) {
+			currentRed = 0;
+		}
+		else if (currentRed > 255) {
+			currentRed = 255;
+		}
+		editedPixelData[i].setRed(currentRed);
+
+		int currentGreen = editedPixelData[i].getGreen();
+		currentGreen += noiseValue;
+		if (currentGreen < 0) {
+			currentGreen = 0;
+		}
+		else if (currentGreen > 255) {
+			currentGreen = 255;
+		}
+		editedPixelData[i].setGreen(currentGreen);
+
+		int currentBlue = editedPixelData[i].getBlue();
+		currentBlue += noiseValue;
+		if (currentBlue < 0) {
+			currentBlue = 0;
+		}
+		else if (currentBlue > 255) {
+			currentBlue = 255;
+		}
+	}
+
+	project.setPixelData(editedPixelData);
+
+	return project;
+}
+
+PpmDocument highContrast(PpmDocument& project)
+{
+	vector<Pixel> editedPixelData = project.getPixelData();
+
+	for (int i = 0; i < project.getPixelCount(); i++)
+	{
+		int currentRed = editedPixelData[i].getRed();
+		if (currentRed > 127) {
+			currentRed = 255;
+		} else {
+			currentRed = 0;
+		}
+
+		int currentGreen = editedPixelData[i].getGreen();
+		if (currentGreen > 127) {
+			currentGreen = 255;
+		} else {
+			currentGreen = 0;
+		}
+
+		int currentBlue = editedPixelData[i].getBlue();
+		if (currentBlue > 127) {
+			currentBlue = 255;
+		} else {
+			currentBlue = 0;
+		}
+
+		editedPixelData[i].setRGB(currentRed, currentGreen, currentBlue);
+	}
+
+	project.setPixelData(editedPixelData);
+
+	return project;
+}
