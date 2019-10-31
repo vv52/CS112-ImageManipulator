@@ -184,3 +184,52 @@ PpmDocument highContrast(PpmDocument& project)
 
 	return project;
 }
+
+PpmDocument flipHorizontal(PpmDocument& project) {
+	vector<vector<Pixel>> flippedImage;
+	vector<Pixel> formattedFlip;
+	vector<Pixel> temp = project.getPixelData();
+
+	flippedImage.resize(project.getHeight());
+
+	for (int k = 0; k < flippedImage.size(); k++)
+	{
+		flippedImage[k].resize(project.getWidth());
+	}
+
+	for (int i = 0; i < project.getHeight(); i++)
+	{
+		for (int j = 0; j < project.getWidth(); j++)
+		{
+			flippedImage[i][project.getWidth() - j] = temp[i]; //STILL FIX THIS LINE
+		}
+	}
+
+	for (int l = 0; l < project.getHeight(); l++)
+	{
+		for (int m = 0; m < project.getWidth(); m++)
+		{
+			formattedFlip.push_back(flippedImage[l][m]);
+		}
+	}
+
+	project.setPixelData(formattedFlip);
+	return project;
+}
+
+/*PpmDocument flipVertical(PpmDocument& project) {
+
+}
+
+PpmDocument rotateNinety(PpmDocument& project) {
+
+}
+
+PpmDocument blurImage(PpmDocument& project) {
+
+}
+
+PpmDocument pixelateImage(PpmDocument& project) {
+
+}
+*/

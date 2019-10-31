@@ -31,7 +31,8 @@ int main(int argc, char* argv[])
 		<< "3. Remove Green" << endl << "4. Negate Red" << endl
 		<< "5. Negate Blue" << endl << "6. Negate Green" << endl
 		<< "7. Greyscale" << endl << "8. Add Random Noise" << endl
-		<< "9. High Contrast" << endl << "Q. Quit Program" << endl
+		<< "9. High Contrast" << endl << "10. Flip Horizontal" << endl
+		<< "Q. Quit Program" << endl
 		<< endl << "Selection (please input as # or \"Q\" only): ";
 	cin >> userIn;
 
@@ -77,6 +78,10 @@ int main(int argc, char* argv[])
 		case 9:
 			editedImage = highContrast(sourceImage);
 			cout << "Applying High Contrast...";
+			break;
+		case 10:
+			editedImage = flipHorizontal(sourceImage);
+			cout << "Applying Horizontal Flip...";
 			break;
 		default:
 			cout << "Invalid selection!";

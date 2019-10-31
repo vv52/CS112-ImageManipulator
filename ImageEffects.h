@@ -17,5 +17,10 @@ PpmDocument negateGreen(PpmDocument& project);
 PpmDocument toGreyscale(PpmDocument& project);
 PpmDocument addNoise(PpmDocument& project);
 PpmDocument highContrast(PpmDocument& project);
+PpmDocument flipHorizontal(PpmDocument& project);
+//PpmDocument flipVertical(PpmDocument& project);
+//PpmDocument rotateNinety(PpmDocument& project);
+//PpmDocument blurImage(PpmDocument& project);
+//PpmDocument pixelateImage(PpmDocument& project);
 
 #endif
