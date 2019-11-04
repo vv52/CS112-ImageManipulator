@@ -315,6 +315,21 @@ PpmDocument rotateNinety(PpmDocument& project) {
 	}
 
 	//PERFORM THE ACTUAL ROTATION HERE
+	
+	for (int l = 0; l < project.getHeight(); l++)
+	{
+		for (int m = 0; m < project.getWidth(); m++)
+		{
+			int wTemp = project.getWidth() - 1;
+			int hTemp = project.getHeight() - 1;
+			temp = dataYX[l][m];
+			temp2 = dataYX[m][wTemp - l];
+			dataYX[l][m] = temp2;
+			dataYX[m][wTemp - l] = temp;
+		}
+	}
+
+	//--------------------------------
 
 	int newTicker = 0;
 
