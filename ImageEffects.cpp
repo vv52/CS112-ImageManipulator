@@ -408,6 +408,50 @@ PpmDocument blurImage(PpmDocument& project) {
 
 	//iterate thru y dimensions averaging values
 
+	for (int p = 0; p < dataYX[0].size(); p++)
+	{
+		for (int q = 0; q < dataYX.size(); q++)
+		{
+			if (q == 0)
+			{
+				tempRed = (dataYX[0][p].getRed() + dataYX[1][p].getRed()) / 2;
+				tempGreen = (dataYX[0][p].getGreen() + dataYX[1][p].getGreen()) / 2;
+				tempBlue = (dataYX[0][p].getBlue() + dataYX[1][p].getBlue()) / 2;
+				dataYX_rotated[0][p].setRGB(tempRed, tempGreen, tempBlue);
+			}
+			else if (q == (project.getHeight() - 1))
+			{
+				tempRed = (dataYX[project.getHeight() - 1][p].getRed()
+					+ dataYX[project.getHeight() - 2][p].getRed()) / 2;
+				tempGreen = (dataYX[project.getHeight() - 1][p].getGreen()
+					+ dataYX[project.getHeight() - 2][p].getGreen()) / 2;
+				tempBlue = (dataYX[project.getHeight() - 1][p].getBlue()
+					+ dataYX[project.getHeight() - 2][p].getBlue()) / 2;
+				dataYX_rotated[project.getHeight() - 1][p].setRGB(tempRed, tempGreen, tempBlue);
+			}
+			else {
+				tempRed = (dataYX[q - 1][p].getRed() + dataYX[q][p].getRed()
+					+ dataYX[q + 1][p].getRed()) / 3;
+				tempGreen = (dataYX[q - 1][p].getGreen() + dataYX[q][p].getGreen()
+					+ dataYX[q + 1][p].getGreen()) / 3;
+				tempBlue = (dataYX[q - 1][p].getBlue() + dataYX[q][p].getBlue()
+					+ dataYX[q + 1][p].getBlue()) / 3;
+				dataYX_rotated[q][p].setRGB(tempRed, tempGreen, tempBlue);
+			}
+
+		}
+	}
+
+	for (int n = 0; n < dataYX_rotated.size(); n++)
+	{
+		for (int o = 0; o < dataYX_rotated[n].size(); o++)
+		{
+			dataRawNew[newTicker] = dataYX_rotated[n][o];
+			newTicker++;
+		}
+	}
+
+	project.setPixelData(dataRawNew);
 	return project;
 }
 
