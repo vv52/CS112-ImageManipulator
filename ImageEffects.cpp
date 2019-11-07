@@ -293,11 +293,11 @@ PpmDocument rotateNinety(PpmDocument& project) {
 	vector<vector<Pixel>> dataYX;
 	vector<vector<Pixel>> dataYX_rotated;
 	vector<Pixel> dataRaw = project.getPixelData();
-	Pixel temp;
-	Pixel temp2;
 	vector<Pixel> dataRawNew;
 	dataRawNew.resize(dataRaw.size());
 	int ticker = 0;
+	int newTicker = 0;
+	int x = 0;
 
 	dataYX.resize(project.getHeight());
 	dataYX_rotated.resize(dataYX.size());
@@ -317,10 +317,6 @@ PpmDocument rotateNinety(PpmDocument& project) {
 		}
 	}
 
-	//PERFORM THE ACTUAL ROTATION HERE
-	
-	int x = 0;
-
 	for (int m = project.getWidth() - 1; m >= 0; m--)
 	{
 		for (int l = 0; l < project.getHeight(); l++)
@@ -329,23 +325,6 @@ PpmDocument rotateNinety(PpmDocument& project) {
 		}
 		x++;
 	}
-
-	/*for (int l = 0; l < project.getHeight(); l++)
-	{
-		for (int m = 0; m < project.getWidth(); m++)
-		{
-			int wTemp = project.getWidth() - 1;
-			int hTemp = project.getHeight() - 1;
-			temp = dataYX[l][m];
-			temp2 = dataYX[m][wTemp - l];
-			dataYX[l][m] = temp2;
-			dataYX[m][wTemp - l] = temp;
-		}
-	}*/
-
-	//--------------------------------
-
-	int newTicker = 0;
 
 	for (int n = 0; n < dataYX_rotated.size(); n++)
 	{
@@ -358,14 +337,42 @@ PpmDocument rotateNinety(PpmDocument& project) {
 
 	project.setPixelData(dataRawNew);
 	return project;
+}
 
+PpmDocument blurImage(PpmDocument& project) {
+	vector<vector<Pixel>> dataYX;
+	vector<vector<Pixel>> dataYX_rotated;
+	vector<Pixel> dataRaw = project.getPixelData();
+	vector<Pixel> dataRawNew;
+	dataRawNew.resize(dataRaw.size());
+	int ticker = 0;
+	int newTicker = 0;
+	int x = 0;
+
+	dataYX.resize(project.getHeight());
+	dataYX_rotated.resize(dataYX.size());
+
+	for (int i = 0; i < dataYX.size(); i++)
+	{
+		dataYX[i].resize(project.getWidth());
+		dataYX_rotated[i].resize(dataYX.size());
+	}
+
+	for (int j = 0; j < dataYX.size(); j++)
+	{
+		for (int k = 0; k < dataYX[j].size(); k++)
+		{
+			dataYX[j][k] = dataRaw[ticker];
+			ticker++;
+		}
+	}
+
+	//iterate thru x dimension averaging values
+
+	//iterate thru y dimensions averaging values
 }
 
 /*
-PpmDocument blurImage(PpmDocument& project) {
-
-}
-
 PpmDocument pixelateImage(PpmDocument& project) {
 
 }

@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 		<< "7. Greyscale" << endl << "8. Add Random Noise" << endl
 		<< "9. High Contrast" << endl << "10. Flip Horizontal" << endl
 		<< "11. Flip Vertical" << endl << "12. Rotate 90 Degrees (CCW)" << endl
-		<< "Q. Quit Program" << endl
+		<< "13. Blur Image" << endl << "Q. Quit Program" << endl
 		<< endl << "Selection (please input as # or \"Q\" only): ";
 	cin >> userIn;
 
@@ -91,6 +91,10 @@ int main(int argc, char* argv[])
 		case 12:
 			editedImage = rotateNinety(sourceImage);
 			cout << "Applying Rotate 90 Degrees...";
+			break;
+		case 13:
+			editedImage = blurImage(sourceImage);
+			cout << "Applying Blur Image..."
 			break;
 		default:
 			cout << "Invalid selection!";
