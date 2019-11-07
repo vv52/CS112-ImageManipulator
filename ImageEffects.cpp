@@ -291,6 +291,7 @@ PpmDocument flipVertical(PpmDocument& project) {
 
 PpmDocument rotateNinety(PpmDocument& project) {
 	vector<vector<Pixel>> dataYX;
+	vector<vector<Pixel>> dataYX_rotated;
 	vector<Pixel> dataRaw = project.getPixelData();
 	Pixel temp;
 	Pixel temp2;
@@ -299,10 +300,12 @@ PpmDocument rotateNinety(PpmDocument& project) {
 	int ticker = 0;
 
 	dataYX.resize(project.getHeight());
+	dataYX_rotated.resize(dataYX.size());
 
 	for (int i = 0; i < dataYX.size(); i++)
 	{
 		dataYX[i].resize(project.getWidth());
+		dataYX_rotated[i].resize(dataYX.size());
 	}
 
 	for (int j = 0; j < dataYX.size(); j++)
@@ -316,7 +319,18 @@ PpmDocument rotateNinety(PpmDocument& project) {
 
 	//PERFORM THE ACTUAL ROTATION HERE
 	
-	for (int l = 0; l < project.getHeight(); l++)
+	int x = 0;
+
+	for (int m = project.getWidth() - 1; m >= 0; m--)
+	{
+		for (int l = 0; l < project.getHeight(); l++)
+		{
+			dataYX_rotated[x][l] = dataYX[l][m];
+		}
+		x++;
+	}
+
+	/*for (int l = 0; l < project.getHeight(); l++)
 	{
 		for (int m = 0; m < project.getWidth(); m++)
 		{
@@ -327,17 +341,17 @@ PpmDocument rotateNinety(PpmDocument& project) {
 			dataYX[l][m] = temp2;
 			dataYX[m][wTemp - l] = temp;
 		}
-	}
+	}*/
 
 	//--------------------------------
 
 	int newTicker = 0;
 
-	for (int n = 0; n < dataYX.size(); n++)
+	for (int n = 0; n < dataYX_rotated.size(); n++)
 	{
-		for (int o = 0; o < dataYX[n].size(); o++)
+		for (int o = 0; o < dataYX_rotated[n].size(); o++)
 		{
-			dataRawNew[newTicker] = dataYX[n][o];
+			dataRawNew[newTicker] = dataYX_rotated[n][o];
 			newTicker++;
 		}
 	}

@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 		<< "5. Negate Blue" << endl << "6. Negate Green" << endl
 		<< "7. Greyscale" << endl << "8. Add Random Noise" << endl
 		<< "9. High Contrast" << endl << "10. Flip Horizontal" << endl
-		<< "11. Flip Vertical" << endl << "12. Rotate 90 Degrees" << endl
+		<< "11. Flip Vertical" << endl << "12. Rotate 90 Degrees (CCW)" << endl
 		<< "Q. Quit Program" << endl
 		<< endl << "Selection (please input as # or \"Q\" only): ";
 	cin >> userIn;
