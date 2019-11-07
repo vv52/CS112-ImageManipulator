@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
 			break;
 		case 13:
 			editedImage = blurImage(sourceImage);
-			cout << "Applying Blur Image..."
+			cout << "Applying Blur Image...";
 			break;
 		default:
 			cout << "Invalid selection!";

@@ -348,6 +348,9 @@ PpmDocument blurImage(PpmDocument& project) {
 	int ticker = 0;
 	int newTicker = 0;
 	int x = 0;
+	int tempRed = 0;
+	int tempGreen = 0;
+	int tempBlue = 0;
 
 	dataYX.resize(project.getHeight());
 	dataYX_rotated.resize(dataYX.size());
@@ -369,7 +372,43 @@ PpmDocument blurImage(PpmDocument& project) {
 
 	//iterate thru x dimension averaging values
 
+	for (int l = 0; l < dataYX.size(); l++)
+	{
+		for (int m = 0; m < dataYX[l].size(); m++)
+		{
+			if (m == 0)
+			{
+				tempRed = (dataYX[l][0].getRed() + dataYX[l][1].getRed()) / 2;
+				tempGreen = (dataYX[l][0].getGreen() + dataYX[l][1].getGreen()) / 2;
+				tempBlue = (dataYX[l][0].getBlue() + dataYX[l][1].getBlue()) / 2;
+				dataYX_rotated[l][0].setRGB(tempRed, tempGreen, tempBlue);
+			}
+			else if (m == (project.getWidth() - 1))
+			{
+				tempRed = (dataYX[l][project.getWidth() - 1].getRed()
+					+ dataYX[l][project.getWidth() - 2].getRed()) / 2;
+				tempGreen = (dataYX[l][project.getWidth() - 1].getGreen()
+					+ dataYX[l][project.getWidth() - 2].getGreen()) / 2;
+				tempBlue = (dataYX[l][project.getWidth() - 1].getBlue()
+					+ dataYX[l][project.getWidth() - 2].getBlue()) / 2;
+				dataYX_rotated[l][project.getWidth() - 1].setRGB(tempRed, tempGreen, tempBlue);
+			}
+			else {
+				tempRed = (dataYX[l][m - 1].getRed() + dataYX[l][m].getRed()
+					+ dataYX[l][m + 1].getRed()) / 3;
+				tempGreen = (dataYX[l][m - 1].getGreen() + dataYX[l][m].getGreen()
+					+ dataYX[l][m + 1].getGreen()) / 3;
+				tempBlue = (dataYX[l][m - 1].getBlue() + dataYX[l][m].getBlue()
+					+ dataYX[l][m + 1].getBlue()) / 3;
+				dataYX_rotated[l][m].setRGB(tempRed, tempGreen, tempBlue);
+			}
+
+		}
+	}
+
 	//iterate thru y dimensions averaging values
+
+	return project;
 }
 
 /*
