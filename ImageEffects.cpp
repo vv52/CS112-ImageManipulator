@@ -441,7 +441,7 @@ PpmDocument blurImage(PpmDocument& project) {
 
 		}
 	}
-
+	
 	for (int n = 0; n < dataYX_rotated.size(); n++)
 	{
 		for (int o = 0; o < dataYX_rotated[n].size(); o++)
@@ -455,8 +455,68 @@ PpmDocument blurImage(PpmDocument& project) {
 	return project;
 }
 
-/*
 PpmDocument pixelateImage(PpmDocument& project) {
+	vector<vector<Pixel>> dataYX;
+	vector<Pixel> dataRaw = project.getPixelData();
+	int ticker = 0;
+	int newTicker = 0;
+	int x = 0;
+	int pixelDiv = 3;
 
+	dataYX.resize(project.getHeight());
+
+	for (int i = 0; i < dataYX.size(); i++)
+	{
+		dataYX[i].resize(project.getWidth());
+	}
+
+	for (int j = 0; j < dataYX.size(); j++)
+	{
+		for (int k = 0; k < dataYX[j].size(); k++)
+		{
+			dataYX[j][k] = dataRaw[ticker];
+			ticker++;
+		}
+	}
+
+	//Find a clean divisor for pixelation
+
+	while (dataYX.size() % pixelDiv != 0)
+	{
+		pixelDiv++;
+	}
+
+	//Pixelate
+	
+	for (int l = 0; l < dataYX.size(); l += pixelDiv)
+	{
+		for (int m = 0; m < dataYX[l].size(); m += pixelDiv)
+		{
+			for (int z = 0; z < pixelDiv; z++)
+			{
+				for (int x = 0; x < pixelDiv; x++)
+				{
+					if ((l + z) > dataYX.size() || (m + x) > dataYX[l].size())
+					{
+						break;
+					}
+					else {
+						dataYX[l + z][m + x].setRGB(dataYX[l][m].getRed(), dataYX[l][m].getGreen(), dataYX[l][m].getBlue());
+					}
+				}
+			}
+		}
+	}
+	
+	for (int n = 0; n < dataYX.size(); n++)
+	{
+		for (int o = 0; o < dataYX[n].size(); o++)
+		{
+			dataRaw[newTicker] = dataYX[n][o];
+			newTicker++;
+		}
+	}
+
+	project.setPixelData(dataRaw);
+	return project;
 }
-*/

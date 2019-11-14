@@ -33,8 +33,8 @@ int main(int argc, char* argv[])
 		<< "7. Greyscale" << endl << "8. Add Random Noise" << endl
 		<< "9. High Contrast" << endl << "10. Flip Horizontal" << endl
 		<< "11. Flip Vertical" << endl << "12. Rotate 90 Degrees (CCW)" << endl
-		<< "13. Blur Image" << endl << "Q. Quit Program" << endl
-		<< endl << "Selection (please input as # or \"Q\" only): ";
+		<< "13. Blur Image"  << endl << "14. Pixelate" << endl
+		<< "Q. Quit Program" << endl << endl << "Selection (please input as # or \"Q\" only): ";
 	cin >> userIn;
 
 	PpmDocument editedImage;
@@ -95,6 +95,10 @@ int main(int argc, char* argv[])
 		case 13:
 			editedImage = blurImage(sourceImage);
 			cout << "Applying Blur Image...";
+			break;
+		case 14:
+			editedImage = pixelateImage(sourceImage);
+			cout << "Applying Pixelate Image...";
 			break;
 		default:
 			cout << "Invalid selection!";
