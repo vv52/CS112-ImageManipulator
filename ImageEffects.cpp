@@ -302,63 +302,64 @@ PpmDocument rotateNinety(PpmDocument& project) {
 	dataYX.resize(project.getHeight());
 	dataYX_rotated.resize(dataYX.size());
 
-	for (int i = 0; i < dataYX.size(); i++)
-	{
-		dataYX[i].resize(project.getWidth());
-		dataYX_rotated[i].resize(dataYX.size());
-	}
+for (int i = 0; i < dataYX.size(); i++)
+{
+	dataYX[i].resize(project.getWidth());
+	dataYX_rotated[i].resize(dataYX.size());
+}
 
-	for (int j = 0; j < dataYX.size(); j++)
+for (int j = 0; j < dataYX.size(); j++)
+{
+	for (int k = 0; k < dataYX[j].size(); k++)
 	{
-		for (int k = 0; k < dataYX[j].size(); k++)
-		{
-			dataYX[j][k] = dataRaw[ticker];
-			ticker++;
-		}
+		dataYX[j][k] = dataRaw[ticker];
+		ticker++;
 	}
+}
 
-	for (int m = project.getWidth() - 1; m >= 0; m--)
+for (int m = project.getWidth() - 1; m >= 0; m--)
+{
+	for (int l = 0; l < project.getHeight(); l++)
 	{
-		for (int l = 0; l < project.getHeight(); l++)
-		{
-			dataYX_rotated[x][l] = dataYX[l][m];
-		}
-		x++;
+		dataYX_rotated[x][l] = dataYX[l][m];
 	}
+	x++;
+}
 
-	for (int n = 0; n < dataYX_rotated.size(); n++)
+for (int n = 0; n < dataYX_rotated.size(); n++)
+{
+	for (int o = 0; o < dataYX_rotated[n].size(); o++)
 	{
-		for (int o = 0; o < dataYX_rotated[n].size(); o++)
-		{
-			dataRawNew[newTicker] = dataYX_rotated[n][o];
-			newTicker++;
-		}
+		dataRawNew[newTicker] = dataYX_rotated[n][o];
+		newTicker++;
 	}
+}
 
-	project.setPixelData(dataRawNew);
-	return project;
+project.setPixelData(dataRawNew);
+return project;
 }
 
 PpmDocument blurImage(PpmDocument& project) {
 	vector<vector<Pixel>> dataYX;
-	vector<vector<Pixel>> dataYX_rotated;
+	vector<vector<Pixel>> dataYX_blur;
 	vector<Pixel> dataRaw = project.getPixelData();
 	vector<Pixel> dataRawNew;
 	dataRawNew.resize(dataRaw.size());
 	int ticker = 0;
 	int newTicker = 0;
-	int x = 0;
 	int tempRed = 0;
 	int tempGreen = 0;
 	int tempBlue = 0;
+	int imgWidth = 0;
+	int imgHeight = 0;
 
 	dataYX.resize(project.getHeight());
-	dataYX_rotated.resize(dataYX.size());
+	dataYX_blur.resize(dataYX.size());
 
 	for (int i = 0; i < dataYX.size(); i++)
 	{
 		dataYX[i].resize(project.getWidth());
-		dataYX_rotated[i].resize(dataYX.size());
+		dataYX_blur[i].resize(dataYX.size());
 	}
 
 	for (int j = 0; j < dataYX.size(); j++)
@@ -370,83 +371,105 @@ PpmDocument blurImage(PpmDocument& project) {
 		}
 	}
 
-	//iterate thru x dimension averaging values
+	imgHeight = dataYX.size() - 1;
+	imgWidth = dataYX[0].size() - 1;
 
-	for (int l = 0; l < dataYX.size(); l++)
+	for (int irow = 0; irow < imgHeight; irow++)
 	{
-		for (int m = 0; m < dataYX[l].size(); m++)
+		for (int icol = 0; icol < imgWidth; icol++)
 		{
-			if (m == 0)
+			if (irow == 0 && icol == 0)
 			{
-				tempRed = (dataYX[l][0].getRed() + dataYX[l][1].getRed()) / 2;
-				tempGreen = (dataYX[l][0].getGreen() + dataYX[l][1].getGreen()) / 2;
-				tempBlue = (dataYX[l][0].getBlue() + dataYX[l][1].getBlue()) / 2;
-				dataYX_rotated[l][0].setRGB(tempRed, tempGreen, tempBlue);
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow + 1][icol].getRed()
+					+ dataYX[irow][icol + 1].getRed()) / 3;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow + 1][icol].getGreen()
+					+ dataYX[irow][icol + 1].getGreen()) / 3;
+				tempBlue - (dataYX[irow][icol].getBlue() + dataYX[irow + 1][icol].getBlue()
+					+ dataYX[irow][icol + 1].getBlue()) / 3;
 			}
-			else if (m == (project.getWidth() - 1))
+			else if (irow == 0 && icol != 0 && icol != imgWidth)
 			{
-				tempRed = (dataYX[l][project.getWidth() - 1].getRed()
-					+ dataYX[l][project.getWidth() - 2].getRed()) / 2;
-				tempGreen = (dataYX[l][project.getWidth() - 1].getGreen()
-					+ dataYX[l][project.getWidth() - 2].getGreen()) / 2;
-				tempBlue = (dataYX[l][project.getWidth() - 1].getBlue()
-					+ dataYX[l][project.getWidth() - 2].getBlue()) / 2;
-				dataYX_rotated[l][project.getWidth() - 1].setRGB(tempRed, tempGreen, tempBlue);
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow + 1][icol].getRed()
+					+ dataYX[irow][icol - 1].getRed() + dataYX[irow][icol].getRed()) / 4;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow + 1][icol].getGreen()
+					+ dataYX[irow][icol - 1].getGreen() + dataYX[irow][icol + 1].getGreen()) / 4;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow + 1][icol].getBlue()
+					+ dataYX[irow][icol - 1].getBlue() + dataYX[irow][icol + 1].getBlue()) / 4;
+			}
+			else if (icol == 0 && irow != 0 && irow != imgHeight)
+			{
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow][icol + 1].getRed()
+					+ dataYX[irow - 1][icol].getRed() + dataYX[irow + 1][icol].getRed()) / 4;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow][icol + 1].getGreen()
+					+ dataYX[irow - 1][icol].getGreen() + dataYX[irow + 1][icol].getGreen()) / 4;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow][icol + 1].getBlue()
+					+ dataYX[irow - 1][icol].getBlue() + dataYX[irow + 1][icol].getBlue()) / 4;
+			}
+			else if (irow == 0 && icol == imgWidth)
+			{
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow + 1][icol].getRed()
+					+ dataYX[irow][icol - 1].getRed()) / 3;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow + 1][icol].getGreen()
+					+ dataYX[irow][icol - 1].getGreen()) / 3;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow + 1][icol].getBlue()
+					+ dataYX[irow][icol - 1].getBlue()) / 3;
+			}
+			else if (icol == 0 && irow == imgHeight)
+			{
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow - 1][icol].getRed()
+					+ dataYX[irow][icol + 1].getRed()) / 3;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow - 1][icol].getGreen()
+					+ dataYX[irow][icol + 1].getGreen()) / 3;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow - 1][icol].getBlue()
+					+ dataYX[irow][icol + 1].getBlue()) / 3;
+			}
+			else if (icol == imgHeight && irow == imgWidth)
+			{
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow - 1][icol].getRed()
+					+ dataYX[irow][icol - 1].getRed()) / 3;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow - 1][icol].getGreen()
+					+ dataYX[irow][icol - 1].getGreen()) / 3;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow - 1][icol].getBlue()
+					+ dataYX[irow][icol - 1].getBlue()) / 3;
+			}
+			else if ((irow == imgHeight) && (icol != 0) && (icol != imgWidth))
+			{
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow - 1][icol].getRed()
+					+ dataYX[irow][icol + 1].getRed() + dataYX[irow][icol - 1].getRed()) / 4;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow - 1][icol].getGreen()
+					+ dataYX[irow][icol + 1].getGreen() + dataYX[irow][icol - 1].getGreen()) / 4;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow - 1][icol].getBlue()
+					+ dataYX[irow][icol + 1].getBlue() + dataYX[irow][icol - 1].getBlue()) / 4;
+			}
+			else if ((icol == imgWidth) && (irow != 0) && (irow != imgHeight))
+			{
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow][icol - 1].getRed()
+					+ dataYX[irow + 1][icol].getRed() + dataYX[irow - 1][icol].getRed()) / 4;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow][icol - 1].getGreen()
+					+ dataYX[irow + 1][icol].getGreen() + dataYX[irow - 1][icol].getGreen()) / 4;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow][icol - 1].getBlue()
+					+ dataYX[irow + 1][icol].getBlue() + dataYX[irow][icol - 1].getBlue()) / 4;
 			}
 			else {
-				tempRed = (dataYX[l][m - 1].getRed() + dataYX[l][m].getRed()
-					+ dataYX[l][m + 1].getRed()) / 3;
-				tempGreen = (dataYX[l][m - 1].getGreen() + dataYX[l][m].getGreen()
-					+ dataYX[l][m + 1].getGreen()) / 3;
-				tempBlue = (dataYX[l][m - 1].getBlue() + dataYX[l][m].getBlue()
-					+ dataYX[l][m + 1].getBlue()) / 3;
-				dataYX_rotated[l][m].setRGB(tempRed, tempGreen, tempBlue);
+				tempRed = (dataYX[irow][icol].getRed() + dataYX[irow - 1][icol].getRed()
+					+ dataYX[irow][icol - 1].getRed() + dataYX[irow + 1][icol].getRed()
+					+ dataYX[irow][icol + 1].getRed()) / 5;
+				tempGreen = (dataYX[irow][icol].getGreen() + dataYX[irow - 1][icol].getGreen()
+					+ dataYX[irow][icol - 1].getGreen() + dataYX[irow + 1][icol].getGreen()
+					+ dataYX[irow][icol + 1].getGreen()) / 5;
+				tempBlue = (dataYX[irow][icol].getBlue() + dataYX[irow - 1][icol].getBlue()
+					+ dataYX[irow][icol - 1].getBlue() + dataYX[irow + 1][icol].getBlue()
+					+ dataYX[irow][icol + 1].getBlue()) / 5;
 			}
-
+			dataYX_blur[irow][icol].setRGB(tempRed, tempGreen, tempBlue);
 		}
 	}
 
-	//iterate thru y dimensions averaging values
-
-	for (int p = 0; p < dataYX[0].size(); p++)
+	for (int n = 0; n < dataYX_blur.size(); n++)
 	{
-		for (int q = 0; q < dataYX.size(); q++)
+		for (int o = 0; o < dataYX_blur[n].size(); o++)
 		{
-			if (q == 0)
-			{
-				tempRed = (dataYX[0][p].getRed() + dataYX[1][p].getRed()) / 2;
-				tempGreen = (dataYX[0][p].getGreen() + dataYX[1][p].getGreen()) / 2;
-				tempBlue = (dataYX[0][p].getBlue() + dataYX[1][p].getBlue()) / 2;
-				dataYX_rotated[0][p].setRGB(tempRed, tempGreen, tempBlue);
-			}
-			else if (q == (project.getHeight() - 1))
-			{
-				tempRed = (dataYX[project.getHeight() - 1][p].getRed()
-					+ dataYX[project.getHeight() - 2][p].getRed()) / 2;
-				tempGreen = (dataYX[project.getHeight() - 1][p].getGreen()
-					+ dataYX[project.getHeight() - 2][p].getGreen()) / 2;
-				tempBlue = (dataYX[project.getHeight() - 1][p].getBlue()
-					+ dataYX[project.getHeight() - 2][p].getBlue()) / 2;
-				dataYX_rotated[project.getHeight() - 1][p].setRGB(tempRed, tempGreen, tempBlue);
-			}
-			else {
-				tempRed = (dataYX[q - 1][p].getRed() + dataYX[q][p].getRed()
-					+ dataYX[q + 1][p].getRed()) / 3;
-				tempGreen = (dataYX[q - 1][p].getGreen() + dataYX[q][p].getGreen()
-					+ dataYX[q + 1][p].getGreen()) / 3;
-				tempBlue = (dataYX[q - 1][p].getBlue() + dataYX[q][p].getBlue()
-					+ dataYX[q + 1][p].getBlue()) / 3;
-				dataYX_rotated[q][p].setRGB(tempRed, tempGreen, tempBlue);
-			}
-
-		}
-	}
-	
-	for (int n = 0; n < dataYX_rotated.size(); n++)
-	{
-		for (int o = 0; o < dataYX_rotated[n].size(); o++)
-		{
-			dataRawNew[newTicker] = dataYX_rotated[n][o];
+			dataRawNew[newTicker] = dataYX_blur[n][o];
 			newTicker++;
 		}
 	}
